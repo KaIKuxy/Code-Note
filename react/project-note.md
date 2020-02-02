@@ -27,7 +27,7 @@ flatten the array
 
 `arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])`
 
-```text
+```jsx
 const transformedIngredients = Object.keys(props.ingredients)
     .map(igKey => {
         return [...Array(props.ingredients[igKey])].map((_, i) => {
