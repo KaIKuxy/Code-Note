@@ -2,7 +2,7 @@
 
 ### Structures
 
-![A better src structure](../.gitbook/assets/image%20%282%29.png)
+![A better src structure](../.gitbook/assets/image%20%283%29.png)
 
 ### Stateful Components & Stateless Components
 
@@ -24,7 +24,7 @@ Stateless Component \(or presentational component\) is a component that does not
 
 Only available in class-based components.
 
-![Lifecycle Diagram](../.gitbook/assets/image%20%286%29.png)
+![Lifecycle Diagram](../.gitbook/assets/image%20%289%29.png)
 
 ```jsx
 constructor()
@@ -246,7 +246,7 @@ the component will be re-rendered only if the props are changed
 
 The render method being called does not immediately also render this to the real DOM.
 
-![](../.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%282%29.png)
 
 Rendering Adjacent Elements
 

@@ -2,7 +2,7 @@
 
 ### Build Workflow
 
-![Using a Build Workflow](../.gitbook/assets/image%20%283%29.png)
+![Using a Build Workflow](../.gitbook/assets/image%20%284%29.png)
 
 Use create-react-app to create react app.
 

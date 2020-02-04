@@ -20,6 +20,7 @@
 * [Debugging React Apps](react/debugging-react-apps.md)
 * [Components & React Internals](react/components-and-react-internals.md)
 * [Project Note](react/project-note.md)
+* [Http / Ajax](react/http-ajax.md)
 
 ## HTML & CSS
 
