@@ -1,7 +1,5 @@
 # Initial page
 
-{% page-ref page="./" %}
-
 Javascript
 
 Leetcode
