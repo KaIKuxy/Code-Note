@@ -254,5 +254,9 @@ instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
 export default instance;
 ```
 
+If set the data in state dynamically, check the elements that use the data carefully.
 
+Set interceptors at constructor, setting it does not cause side-effect.
+
+Remove interceptors when the component will be unmounted to prevent memory-leaking.
 
