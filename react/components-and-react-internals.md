@@ -24,7 +24,7 @@ Stateless Component \(or presentational component\) is a component that does not
 
 Only available in class-based components.
 
-![Lifecycle Diagram](../.gitbook/assets/image%20%289%29.png)
+![Lifecycle Diagram](../.gitbook/assets/image%20%2811%29.png)
 
 ```jsx
 constructor()

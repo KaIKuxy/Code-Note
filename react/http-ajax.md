@@ -56,7 +56,7 @@ postDataHandler = () => {
 
 ### Lifecycles review
 
-![Lifecycle Review](../.gitbook/assets/image%20%288%29.png)
+![Lifecycle Review](../.gitbook/assets/image%20%2810%29.png)
 
 <table>
   <thead>
