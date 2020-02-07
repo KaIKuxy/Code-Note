@@ -2,7 +2,7 @@
 
 ### Structures
 
-![A better src structure](../.gitbook/assets/image%20%283%29.png)
+![A better src structure](../.gitbook/assets/image%20%284%29.png)
 
 ### Stateful Components & Stateless Components
 
@@ -24,7 +24,7 @@ Stateless Component \(or presentational component\) is a component that does not
 
 Only available in class-based components.
 
-![Lifecycle Diagram](../.gitbook/assets/image%20%2811%29.png)
+![Lifecycle Diagram](../.gitbook/assets/image%20%2813%29.png)
 
 ```jsx
 constructor()

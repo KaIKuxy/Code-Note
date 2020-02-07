@@ -56,7 +56,7 @@ postDataHandler = () => {
 
 ### Lifecycles review
 
-![Lifecycle Review](../.gitbook/assets/image%20%2810%29.png)
+![Lifecycle Review](../.gitbook/assets/image%20%2811%29.png)
 
 <table>
   <thead>
@@ -184,7 +184,7 @@ componentDidUpdate (prevProps, prevState) {
 4. Data received, `loadedPost` in state changed, so the `FullPost` component re-rendered again \(2nd time\).
 5. \[FullPost\] componentDidUpdate printed, data requested stopped because the `loadedPostId` is the same as `this.props.id`.
 
-![Log Info](../.gitbook/assets/image%20%286%29.png)
+![Log Info](../.gitbook/assets/image%20%287%29.png)
 
 The first didupdate caused by cascading re-render when The `Blog` component received the data and `setState`.
 
