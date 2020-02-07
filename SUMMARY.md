@@ -11,6 +11,7 @@
 
 * [Notes from MDN](notes-from-mdn.md)
 * [Promises](promises.md)
+* [Async Functions](async-functions.md)
 
 ## React
 
