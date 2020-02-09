@@ -158,3 +158,60 @@ postSelectedHandler = (id) => {
 <Route path={`${this.props.match.url}/:id`} exact component={FullPost} />
 ```
 
+### Redirect
+
+Trivial way, have multiple routes that render the same component.
+
+Using Redirect component
+
+```jsx
+<Switch>
+    <Route path="/new-post" component={NewPost} />
+    <Route path="/posts" component={Posts} />
+    <Redirect from="/" to="/posts" />
+    // from attribute can only be used in Switch Component
+</Switch>
+```
+
+Render redirect conditionally using state. \(Set a submitted state, once submitted, set it to true, and the redirect component depend on this state\)
+
+```jsx
+render () {
+    let redirect = null;
+    if (this.state.submitted) {
+        redirect = <Redirect to="/posts/" />;
+    }
+    return (
+        <div className="NewPost">
+            {redirect}
+```
+
+Another way of redirection: using history.push / history.replace
+
+```jsx
+postDataHandler = () => {
+    const data = {
+        title: this.state.title,
+        body: this.state.content,
+        author: this.state.author
+    };
+    axios.post('/posts', data)
+        .then(response => {
+            console.log(response)
+            this.props.history.push('/posts');
+            // this.setState({submitted: true});
+        });
+}
+```
+
+### Using guard to save prticular pages
+
+set auth state and render the route component based on the state.
+
+### Handling the 404 case
+
+```jsx
+<Route render={() => <h1>Not found</h1>} />
+// catches all the routes not handled prior to it.
+```
+
