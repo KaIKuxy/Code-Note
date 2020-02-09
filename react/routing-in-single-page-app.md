@@ -141,3 +141,20 @@ When NewPost is clicked, :id route will also be matched successfully, but with i
 
 But when the NewPost is clicked when there is no post clicked, it will throw an error.
 
+Navigate using this.props.history.push
+
+```jsx
+postSelectedHandler = (id) => {
+    this.props.history.push({pathname: '/' + id});
+}
+```
+
+### Nested route
+
+* hardcode the entire url
+* get the current path dynamically
+
+```jsx
+<Route path={`${this.props.match.url}/:id`} exact component={FullPost} />
+```
+
