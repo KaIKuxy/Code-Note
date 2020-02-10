@@ -1,6 +1,6 @@
 # Routing in Single-Page-App
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2814%29.png)
 
 Two packages for routing: react-router & react-router-dom
 
@@ -214,4 +214,83 @@ set auth state and render the route component based on the state.
 <Route render={() => <h1>Not found</h1>} />
 // catches all the routes not handled prior to it.
 ```
+
+### Loading Routes Lazily
+
+Split the component outside of the bundle.js provided by the webpack.
+
+Use a higher order component to replace the original component, import the original component once the hoc is mounted and render the original component.
+
+```jsx
+import React, { Component } from 'react';
+
+const asyncComponent = (importComponent) => {
+    return class extends Component {
+        state = {
+            component: null
+        }
+
+        componentDidMount () {
+            importComponent()
+                .then(cmp => {
+                    this.setState({component: cmp.default});
+                });
+        }
+
+        render () {
+            const C = this.state.component;
+
+            return C ? <C {...this.props} /> : null;
+        }
+    }
+};
+
+export default asyncComponent;
+
+
+import asyncComponent from '../../hoc/asyncComponent';
+// import NewPost from './NewPost/NewPost';
+const AsyncNewPost = asyncComponent(() => {
+    return import('./NewPost/NewPost');
+});
+
+{this.state.auth ? <Route path="/new-post" component={AsyncNewPost} /> : null}
+```
+
+In this way, the newPost component will only be loaded once the new-post is requested by the user.
+
+![](../.gitbook/assets/image%20%2813%29.png)
+
+#### A new way after react 16
+
+```jsx
+import { Suspense } from 'react';
+const Posts = React.lazy(() => import('./containers/Posts'));
+
+<Route path="/posts" render()={() => <Suspense fallback={<div>Loading...<div>}> <Posts /> </Suspense>} />
+// fallback is used in cases where React postpones the rendering of the wrapped component.
+
+state = {showPosts: false};
+
+modeHandler = () => {
+    this.setState(prevState => {
+        return {showPosts: !prevState.show};
+    });    
+}
+
+
+
+<button onClick={this.modeHandler}>Toggle mode</button>
+{this.state.showPosts? (<Suspense fallback={<div>Loading...<div>}> <Posts /> </Suspense>) : <User/>}
+```
+
+### When deploying to the server
+
+React App knows the routes, not the server, so without settting up, the server will return 404 error. Server have to always forward the request to the client and returns the index page then allows React to work with the url.
+
+If the url is example.com/my-app, then set the basename prop of the component BrowserRouter to `my-app`.
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+
 
