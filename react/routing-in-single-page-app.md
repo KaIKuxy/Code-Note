@@ -1,23 +1,27 @@
+---
+description: 'React Router https://reacttraining.com/react-router/core/guides/philosophy'
+---
+
 # Routing in Single-Page-App
 
-![](../.gitbook/assets/image%20%2814%29.png)
+## How to do multiple routing in a single page app?
 
-Two packages for routing: react-router & react-router-dom
+![Routing is done by React in a SPA](../.gitbook/assets/image%20%2814%29.png)
 
-Wrap the whole App with `BrowserRouter` from `react-router-dom`
+Two packages for routing: **react-router** & **react-router-dom** \(react-router-dom has dependency on react-router so just install react-router-dom\)
+
+Wrap the whole App with `BrowserRouter` from react-router-dom
 
 ```jsx
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-
-import Blog from './containers/Blog/Blog';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <Blog />
+          // ...
         </div>
       </BrowserRouter>
     );
@@ -27,7 +31,21 @@ class App extends Component {
 export default App;
 ```
 
-Render different component using `Route` component from `react-router-dom`
+Render different component using `Route` component from react-router-dom
+
+## Two ways of routing component
+
+### Use component prop
+
+```jsx
+<Route path="/" exact component={RoutedComponent} />
+```
+
+The component will get the props from Route component \(`match`, `location` and `history`\)
+
+With component prop, we cannot send props to the routed component.
+
+### Use render prop
 
 ```jsx
 <Route path="/" exact render={() => <h1>Home</h1>} />
@@ -35,49 +53,51 @@ Render different component using `Route` component from `react-router-dom`
 // Use exact to render the route only match exactly with the path
 ```
 
-Load component directly:
+Wrap switch component by `Switch` from `react-router-dom` to only render one route-related component.
 
-```jsx
-<Route path="/" exact component={Posts} />
-```
+## Not &lt;a&gt; but &lt;Link&gt; / &lt;NavLink&gt;
 
-If the link is a tag, then the page is reloaded again and again, and the state is lost.
+### Who does the routing job?
 
-Use `Link` component from `react-router-dom`
+React App knows the routes, not the server, so without settting up, the server will return 404 error. Server have to always forward any request from the client back to the client and returns the index page then allows React to work with the url.
+
+If the url is example.com/my-app, then set the basename prop of the component BrowserRouter to `my-app`.
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+If the link is `<a>`, then the page is reloaded again and again, and the state is lost.
+
+### Use `Link` component from react-router-dom
 
 ```jsx
 // Either a string or an object
-<Link to="/">Home</Link>
+<Link to="/">Link</Link>
 <Link to={{
     pathname: '/new-post',
     hash: '#submit',
     search: '?quick-submit=true'
-}}>NewPost</Link>
+}}>Link</Link>
 ```
 
-Link prevents from sending new request.
+`Link` component prevents from sending new request.
 
-Use withRouter from `react-router-dom` to wrap the component and add route-related props from descendent component
+### How to get the routing props
+
+Only the component that is specified in a `Route` component has the routing props. Otherwise, to get the routing information:
+
+1. Use `withRouter` from react-router-dom to wrap the component and add route-related props from the descendent component, the closest one that has routing information.
 
 ```jsx
 export default withRouter(post);
 ```
 
-Setting `to` in Link component get absolute path and append it to the root domain.
+2. Pass the props to the inner component.
 
-Way of building relative paths:
+### Use NavLink to set styles
 
-```jsx
-<Link to={{
-    pathname: this.props.match.url + '/new-post',
-    hash: '#submit',
-    search: '?quick-submit=true'
-}}>NewPost</Link>
-```
+Use `NavLink` component from react-router-dom. If not specified by prop `activeClassName`, the NavLink will get a active class .active when it matches the current url.
 
-Use `NavLink` from react-router-dom to get active class `.active`. Also remember to set exact to `NavLink` component to prevent multiple active class.
-
-Setting `activeClassName` to use custom active class.
+Remember to set exact to `NavLink` component to prevent multiple active class.
 
 ```jsx
 <NavLink
@@ -101,13 +121,31 @@ Setting `activeStyle` to set up inline active style.
 >Home</NavLink>
 ```
 
-Use "/:dynamic\_content" to handle dynamic content in the url, like data's id. And put higher-priority router at front.
+## Absolute path & relative path
+
+### Way of getting absolute path
+
+Set prop `to` in the `Link` component get absolute path and append it to the root domain \( + basename configured in the  `BrowserRouter` component\).
+
+### Way of building relative path
+
+```jsx
+<Link to={{
+    pathname: this.props.match.url + '/new-post',
+    hash: '#submit',
+    search: '?quick-submit=true'
+}}>NewPost</Link>
+```
+
+## Get content in the url
+
+Use "/:dynamic\_content" to handle dynamic content in the url, like data's id. It will match all the url with /, so remember: **more specific url first**.
 
 ```jsx
 <Route path="/:id" exact component={FullPost} />
 ```
 
-Retrive the dynamic content in url by making the component route-related and find the content in props:
+Retrive the dynamic content in url by **making the component route-related** and find the content in props
 
 ```jsx
 componentDidMount () {
@@ -120,9 +158,9 @@ componentDidMount () {
 
 The path in the `match` object will still be the one with dynamic content variable, with content in `match.params`
 
-retrieve search key-value pair from props.location.search.
+Retrieve search key-value pair from props.location.search.
 
-retrieve fragment from props.location.hash
+Retrieve fragment from props.location.hash
 
 ```javascript
 componentDidMount() {
@@ -133,13 +171,13 @@ componentDidMount() {
 }
 ```
 
-Wrap switch component by `Switch` from `react-router-dom` to only render one route-related component.
-
-### For the issue in lecture 234
+## For the issue in lecture 234
 
 When NewPost is clicked, :id route will also be matched successfully, but with id "new-post". When click a post then click NewPost, the fullpost will remain because the FullPost component's state is not null, and the fetching method is in componentDidMount, so the wrong id will not be used to fetch data.
 
 But when the NewPost is clicked when there is no post clicked, it will throw an error.
+
+## An alternative of `Link` & `NavLink`
 
 Navigate using this.props.history.push
 
@@ -149,7 +187,7 @@ postSelectedHandler = (id) => {
 }
 ```
 
-### Nested route
+## Nested route
 
 * hardcode the entire url
 * get the current path dynamically
@@ -158,22 +196,19 @@ postSelectedHandler = (id) => {
 <Route path={`${this.props.match.url}/:id`} exact component={FullPost} />
 ```
 
-### Redirect
+## Redirect
 
-Trivial way, have multiple routes that render the same component.
-
-Using Redirect component
+Use `Redirect` component
 
 ```jsx
 <Switch>
-    <Route path="/new-post" component={NewPost} />
     <Route path="/posts" component={Posts} />
     <Redirect from="/" to="/posts" />
     // from attribute can only be used in Switch Component
 </Switch>
 ```
 
-Render redirect conditionally using state. \(Set a submitted state, once submitted, set it to true, and the redirect component depend on this state\)
+Render redirect conditionally using state. \(Usage: Set a submitted state, once submitted, set it to true, and the redirect component depend on this state\)
 
 ```jsx
 render () {
@@ -283,14 +318,6 @@ modeHandler = () => {
 <button onClick={this.modeHandler}>Toggle mode</button>
 {this.state.showPosts? (<Suspense fallback={<div>Loading...<div>}> <Posts /> </Suspense>) : <User/>}
 ```
-
-### When deploying to the server
-
-React App knows the routes, not the server, so without settting up, the server will return 404 error. Server have to always forward the request to the client and returns the index page then allows React to work with the url.
-
-If the url is example.com/my-app, then set the basename prop of the component BrowserRouter to `my-app`.
-
-![](../.gitbook/assets/image%20%285%29.png)
 
 Prevent request for form submit
 
