@@ -294,7 +294,7 @@ If the url is example.com/my-app, then set the basename prop of the component Br
 
 Prevent request for form submit
 
-```text
+```jsx
 submitHandler = (event) => {
     event.preventDefault();
 }
