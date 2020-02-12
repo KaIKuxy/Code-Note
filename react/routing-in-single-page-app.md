@@ -292,5 +292,11 @@ If the url is example.com/my-app, then set the basename prop of the component Br
 
 ![](../.gitbook/assets/image%20%285%29.png)
 
+Prevent request for form submit
 
+```text
+submitHandler = (event) => {
+    event.preventDefault();
+}
+```
 
