@@ -23,6 +23,7 @@
 * [Project Note](react/project-note.md)
 * [Http / Ajax](react/http-ajax.md)
 * [Routing in Single-Page-App](react/routing-in-single-page-app.md)
+* [Forms and form validation](react/forms-and-form-validation.md)
 
 ## HTML & CSS
 
