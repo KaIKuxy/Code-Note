@@ -6,7 +6,7 @@ description: 'React Router https://reacttraining.com/react-router/core/guides/ph
 
 ## How to do multiple routing in a single page app?
 
-![Routing is done by React in a SPA](../.gitbook/assets/image%20%2814%29.png)
+![Routing is done by React in a SPA](../.gitbook/assets/image%20%2816%29.png)
 
 Two packages for routing: **react-router** & **react-router-dom** \(react-router-dom has dependency on react-router so just install react-router-dom\)
 
@@ -63,7 +63,7 @@ React App knows the routes, not the server, so without settting up, the server w
 
 If the url is example.com/my-app, then set the basename prop of the component BrowserRouter to `my-app`.
 
-![](../.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%286%29.png)
 
 If the link is `<a>`, then the page is reloaded again and again, and the state is lost.
 
@@ -154,7 +154,7 @@ componentDidMount () {
 }
 ```
 
-![](../.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image%20%284%29.png)
 
 The path in the `match` object will still be the one with dynamic content variable, with content in `match.params`
 
@@ -294,7 +294,7 @@ const AsyncNewPost = asyncComponent(() => {
 
 In this way, the newPost component will only be loaded once the new-post is requested by the user.
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2815%29.png)
 
 #### A new way after react 16
 
