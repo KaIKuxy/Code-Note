@@ -116,3 +116,11 @@ In this way, we **cannot** use the content from another reducer. We have to stil
 
 ![](../.gitbook/assets/image%20%282%29.png)
 
+## Resources
+
+* Redux Docs: [https://redux.js.org/](https://redux.js.org/)
+* Core Concepts: [https://redux.js.org/introduction/core-concepts](https://redux.js.org/introduction/core-concepts)
+* Actions: [https://redux.js.org/basics/actions](https://redux.js.org/basics/actions)
+* Reducers: [https://redux.js.org/basics/reducers](https://redux.js.org/basics/reducers)
+* Redux FAQs: [https://redux.js.org/faq](https://redux.js.org/faq)
+
